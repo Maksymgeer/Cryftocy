@@ -11,56 +11,20 @@ import Swiper, { Navigation, Pagination } from "swiper";
 const swiperSlider = new Swiper('.slider__init', {
 	modules: [Navigation, Pagination],
 
-	slidesPerView: "auto",
-	autoHeight: true,
-	speed: 500,
-	autoplay: {
-		delay: 2500,
-	},
-
 	pagination: {
 		el: '.swiper-pagination',
 		clickable: true,
 	},
 });
 
-const swiperBest = new Swiper('.best-films__slider', {
-	modules: [Navigation, Pagination],
-
-	slidesPerView: 5,
-	autoHeight: true,
-	speed: 500,
-	spaceBetween: 15,
-
-	navigation: {
-		nextEl: '.swiper-button-next',
-		prevEl: '.swiper-button-prev',
-	},
 
 
-});
 
 
-const swiperColl = new Swiper('.popullar-collections__inner', {
-	modules: [Navigation, Pagination],
-	slidesPerView: 1,
-	autoHeight: true,
-	centeredSlides: true,
-	
 
-	navigation: {
-		nextEl: '.swiper-button-next',
-		prevEl: '.swiper-button-prev',
-	},
-
-	pagination: {
-		el: '.swiper-pagination',
-		clickable: true,
-	},
-});
 
 //----------------------- BURDER ----------------------//
-const iconMenu = document.querySelector(".menu__box-icon");
+const iconMenu = document.querySelector(".menu__icon");
 if (iconMenu) {
 	const menuBody = document.querySelector(".menu__body");
 	iconMenu.addEventListener("click", function (e) {
@@ -70,6 +34,40 @@ if (iconMenu) {
 }
 
 
+
+(function () {
+	"use strict";
+ 
+	// define variables
+	var items = document.querySelectorAll(".timeline li");
+ 
+	// check if an element is in viewport
+	// http://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport
+	function isElementInViewport(el) {
+	  var rect = el.getBoundingClientRect();
+	  return (
+		 rect.top >= 0 &&
+		 rect.left >= 0 &&
+		 rect.bottom <=
+			(window.innerHeight || document.documentElement.clientHeight) &&
+		 rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+	  );
+	}
+ 
+	function callbackFunc() {
+	  for (var i = 0; i < items.length; i++) {
+		 if (isElementInViewport(items[i])) {
+			items[i].classList.add("in-view");
+		 }
+	  }
+	}
+ 
+	// listen for events
+	window.addEventListener("load", callbackFunc);
+	window.addEventListener("resize", callbackFunc);
+	window.addEventListener("scroll", callbackFunc);
+ })();
+ 
 /*
 const btnMore = document.querySelector('.what-about__more');
 if (btnMore) {
